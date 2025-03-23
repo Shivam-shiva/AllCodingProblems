@@ -47,7 +47,7 @@ public class ArraysIntersection {
 			 
 			 if(arr1[pointer1]<arr2[pointer2]) {
 				 pointer1++;
-			 }if(arr1[pointer1]>arr2[pointer2]) {
+			 }else if(arr1[pointer1]>arr2[pointer2]) {
 				 pointer2++;
 			 }else {
 				 System.out.println(arr1[pointer1]);
