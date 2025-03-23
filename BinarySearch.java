@@ -15,7 +15,7 @@ public class BinarySearch {
 		System.out.println("Enter the target");
 		int target = s.nextInt();
 		
-		System.out.println("Index is "+ BinarySearch(arr,target));
+		System.out.println("Index is "+ BinarySearch(arr,target)+".\nIf -1 then target in not in the array");
 
 	}
 	
@@ -24,7 +24,6 @@ public class BinarySearch {
 		int start =0;
 		int end= arr.length-1;
 		Arrays.sort(arr);
-		System.out.println(start+" "+end);
 		
 		while(start<end) {
 			int mid=(start+end)/2;
