@@ -1,6 +1,6 @@
 package allQuestions;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class TowerOfHanoi {
 
@@ -23,5 +23,6 @@ public class TowerOfHanoi {
 		towerOfHanoi(plate-1, hl, sr, de);	
 		
 	}
+	
 
 }
