@@ -1,5 +1,11 @@
 package allQuestions;
 
+
+//For a given input string(str), write a function to print all the possible substrings.
+//
+//Substring
+//A substring is a contiguous sequence of characters within a string. 
+//Example: "cod" is a substring of "coding". Whereas, "cdng" is not as the characters taken are not contiguous
 import java.util.*;
 
 public class AllSubString {
