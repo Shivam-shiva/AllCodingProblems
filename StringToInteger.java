@@ -15,14 +15,12 @@ public class StringToInteger {
 	}
 
 	private static int stringToInteger(String str, int num , int index) {
-		if(str.length()==1 || index==str.length()-1) {
-			System.out.println(num+" "+(str.charAt(index)-48)+" "+index);
+		if(str.length()==1 || index==str.length()-1) 
 			return str.charAt(index)-48;
-		}
+		
 		
 		int n= (int) ((str.charAt(index)-48)*(Math.pow(10, num)));
 		int m = stringToInteger(str,num-1, index+1);
-//		System.out.println(num+" "+n+" "+index);
 		return n+m;
 		
 	}
