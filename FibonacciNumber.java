@@ -1,5 +1,7 @@
 package allQuestions;
 
+//  Write code for Fibonacci Series 1, 1, 2, 3, 5, 8 ....
+
 import java.util.*;
 
 public class FibonacciNumber {
@@ -23,5 +25,6 @@ public class FibonacciNumber {
 		
 		return PrintFibonacci(num-1)+PrintFibonacci(num-2);
 	}
+	
 
 }
