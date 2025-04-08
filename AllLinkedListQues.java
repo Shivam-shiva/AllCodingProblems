@@ -26,7 +26,8 @@ public class AllLinkedListQues {
 			list.add(new LinkedListStr<Integer>(data));
 			data=s.nextInt();
 		}
-		list.setAtPos(1,new LinkedListStr<Integer>(8) );
+		list.setAtIndex(1,new LinkedListStr<Integer>(8) );
+		list.removeAtindex(3);
 		list.print();
 		
 	}

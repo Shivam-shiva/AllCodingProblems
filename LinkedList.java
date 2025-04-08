@@ -49,11 +49,34 @@ public class LinkedList<T> {
 		
 	}
 	
-	public void setAtPos(int pos , LinkedListStr<T> newNode) {
-		if(head==null || pos<0)
+	public void removeAtindex(int index) {
+		if(head==null || index<0 || index >=size)
 			return ;
 		
-		 if (pos == 1) {
+		 if (index == 0) {
+		        head=head.next;
+		        size--;
+		        return;
+		    }
+		 LinkedListStr<T> current =head;
+			while(index>1 && current!=null) {
+				index--;
+				current=current.next;
+			}
+			if(current!=null && current.next!=null) {
+			current.next=current.next.next;
+			if(current.next==null)
+				tail = current;
+			size--;
+			}
+			
+	}
+	
+	public void setAtIndex(int index , LinkedListStr<T> newNode) {
+		if(head==null || index<0)
+			return ;
+		
+		 if (index == 1) {
 		        newNode.next = head;
 		        head = newNode;
 		        if (tail == null)
@@ -63,8 +86,8 @@ public class LinkedList<T> {
 		    }
 		
 		LinkedListStr<T> current =head;
-		while(pos>1 && current!=null) {
-			pos--;
+		while(index>1 && current!=null) {
+			index--;
 			current=current.next;
 		}
 		
