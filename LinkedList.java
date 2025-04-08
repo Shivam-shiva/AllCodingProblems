@@ -49,6 +49,34 @@ public class LinkedList<T> {
 		
 	}
 	
+	public void setAtPos(int pos , LinkedListStr<T> newNode) {
+		if(head==null || pos<0)
+			return ;
+		
+		 if (pos == 1) {
+		        newNode.next = head;
+		        head = newNode;
+		        if (tail == null)
+		        	tail = newNode;
+		        size++;
+		        return;
+		    }
+		
+		LinkedListStr<T> current =head;
+		while(pos>1 && current!=null) {
+			pos--;
+			current=current.next;
+		}
+		
+		 if (current == null || current.next == null) {
+		        return;
+		    }
+		 
+		 newNode.next = current.next;
+		    current.next = newNode;
+		size++;
+	}
+	
 	public void print() {
 		if(head==null) {
 			System.out.println("No element to print");
