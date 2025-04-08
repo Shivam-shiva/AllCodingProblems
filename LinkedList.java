@@ -2,40 +2,63 @@ package allQuestions;
 
 public class LinkedList<T> {
 	
-	public LinkedListStr<T> head;
-	public LinkedListStr<T> nextE ;
+	private LinkedListStr<T> head;
+	private LinkedListStr<T> tail ;
+	private int size;
 	
 	public LinkedList() {
-		head= null;
-		nextE = null;
+		size=0;
+	}
+	
+	public int getSize() {
+		 return size;
 	}
 	
 	
-	public  LinkedListStr<T> add(LinkedListStr<T> node) {
+	public  void add(LinkedListStr<T> node) {
 		if(head==null) {
 			head = node;
-			nextE =node;
-			return head;
+			tail =node;
+			size++;
+			return ;
 		}
-		nextE.next= node;
-		nextE = node;
-		return head;
+		tail.next= node;
+		tail = node;
+		size++;
 	}
 	
-	public LinkedListStr<T> remove(){
+	public void remove(){
 		if(head==null) {
 			System.out.println("No element to remove");
-			return head;
+			return;
 		}
-		
+		if(head.next==null) {
+			head= null;
+			tail= null;
+			size--;
+			return;
+		}
+			
 		LinkedListStr<T> node= head;
-		while(node.next!=nextE) {
+		while( node.next!=tail) {
 			node=node.next;
 		}
-		nextE=node;
-		nextE.next=null;
+		tail=node;
+		size--;
+		tail.next=null;
 		
-		return head;
+	}
+	
+	public void print() {
+		if(head==null) {
+			System.out.println("No element to print");
+			return;
+		}
+		LinkedListStr<T> node= head;
+		while(node!=null) {
+			System.out.print(node.data+" ");
+			node=node.next;
+		}
 	}
 	
 }
