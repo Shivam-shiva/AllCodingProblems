@@ -127,4 +127,25 @@ public class LinkedList<T> {
 		
 	}
 	
+	public void reverseLL() {
+		if(head==null || head.next==null) {
+			return;
+		}
+		
+		LinkedListStr<T> prevNode=head;
+		LinkedListStr<T> curNode=head.next;
+		LinkedListStr<T> nextNode=curNode.next;
+		
+		while(nextNode!=null ) {
+			curNode.next=prevNode;
+			prevNode = curNode;
+			curNode= nextNode;
+			nextNode= nextNode.next;
+		}
+		curNode.next=prevNode;
+		head.next=null;
+		tail= head;
+		head=curNode; 
+	}
+	
 }

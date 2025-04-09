@@ -28,8 +28,9 @@ public class AllLinkedListQues {
 		}
 //		list.setAtIndex(1,new LinkedListStr<Integer>(8) );
 //		list.removeAtindex(3);
-		list.printRecursiveHelper();
-		
+//		list.printRecursiveHelper();
+		list.reverseLL();
+		list.print();
 	}
 
 }
