@@ -110,6 +110,21 @@ public class LinkedList<T> {
 			System.out.print(node.data+" ");
 			node=node.next;
 		}
+		
+	}
+	
+	public void printRecursiveHelper() {
+		printRecursive(head);
+	}
+
+	private void printRecursive(LinkedListStr<T> curNode) {
+		if(curNode==null) {
+			return;
+		}
+		
+		System.out.print(curNode.data+" ");
+		printRecursive(curNode.next);
+		
 	}
 	
 }
