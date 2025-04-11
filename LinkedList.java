@@ -14,6 +14,15 @@ public class LinkedList<T> {
 		 return size;
 	}
 	
+	public LinkedListStr<T> getHead(){
+		return head;
+	}
+	
+	
+	public  void printHelper(LinkedListStr<T> node) {
+		head=node;
+	}
+	
 	
 	public  void add(LinkedListStr<T> node) {
 		if(head==null) {

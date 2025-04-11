@@ -29,8 +29,60 @@ public class AllLinkedListQues {
 //		list.setAtIndex(1,new LinkedListStr<Integer>(8) );
 //		list.removeAtindex(3);
 //		list.printRecursiveHelper();
-		list.reverseLL();
+//		list.reverseLL();
+		LinkedListStr<Integer> head = list.getHead();
+		head=oddEvenLL(head);
 		list.print();
 	}
+	
+	
+	/*For a given singly linked list of integers, arrange the nodes such that all the even number nodes are placed after the all odd number nodes. The relative order of the odd and even terms should remain unchanged.
+
+	Note :
+	1. No need to print the linked list, it has already been taken care. Only return the new head to the list.
+	2. Don't create a new linked list.
+	3.  Just change the data, instead rearrange the provided list.*/
+	
+	public static LinkedListStr<Integer> oddEvenLL(LinkedListStr<Integer> head) {
+		LinkedListStr<Integer> nextOdd= head;
+		LinkedListStr<Integer> curNode=head;
+		
+		while(curNode!=null) {
+			if(curNode.data%2!=0) {
+				if(curNode==nextOdd) {
+					nextOdd= nextOdd.next;
+					curNode=curNode.next;
+					continue;
+				}
+					
+				int data = nextOdd.data;
+				nextOdd.data=curNode.data;
+				LinkedListStr<Integer> node = nextOdd.next;
+				while(node!=curNode.next) {
+					int dd = node.data;
+					node.data= data ;
+					data = dd;
+					node= node.next;
+				}
+				nextOdd=nextOdd.next;
+				curNode=curNode.next;
+			}
+			else {
+				if(nextOdd.data%2!=0)
+					nextOdd=curNode;
+				curNode=curNode.next;
+			}
+		}
+		
+		return head;
+		
+	}
+	
 
 }
+
+
+
+
+
+
