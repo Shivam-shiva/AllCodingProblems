@@ -1,6 +1,6 @@
 package allQuestions;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class AllLinkedListQues {
 
@@ -33,7 +33,7 @@ public class AllLinkedListQues {
 		LinkedListStr<Integer> head = list.getHead();
 //		head=oddEvenLL(head);
 		int m=s.nextInt(), n =s.nextInt();
-		head = deleteMNNode(head, m , n);
+		head = swapNodeNM(head, m , n);
 		list.print();
 	}
 	
@@ -115,6 +115,57 @@ public class AllLinkedListQues {
 		return head;
 	}
 	
+	
+	/*You have been given a singly linked list of integers along with two integers, 'i,' and 'j.' Swap the nodes that are present at the 'i-th' and 'j-th' positions and return the new head to the list.
+
+			Note :
+			1. Remember, You need to swap the nodes, not only the data.
+			2. Indexing starts from 0.
+			3. No need to print the list, it has already been taken care.*/
+	
+	public static LinkedListStr<Integer> swapNodeNM(LinkedListStr<Integer> head, int m, int n) {
+	    if (head == null || m == n) return head;
+	    if (m > n) {
+	        int temp = m;
+	        m = n;
+	        n = temp;
+	    }
+
+	    LinkedListStr<Integer> curNode = head;
+	    LinkedListStr<Integer> firstNode = null;
+	    LinkedListStr<Integer> secondNode = null;
+	    LinkedListStr<Integer> h1 = null;
+	    LinkedListStr<Integer> h2 = null;
+	    int idx = 0;
+
+	    while (curNode != null) {
+	        if (idx == m - 1) h1 = curNode;
+	        if (idx == m) firstNode = curNode;
+	        if (idx == n - 1) h2 = curNode;
+	        if (idx == n) {
+	            secondNode = curNode;
+	            break;
+	        }
+	        curNode = curNode.next;
+	        idx++;
+	    }
+
+	    if (firstNode == null || secondNode == null) return head;
+
+	    if (h1 != null) h1.next = secondNode;
+	    else head = secondNode;
+
+	    if (h2 != null && h2 != firstNode) h2.next = firstNode;
+	    else if (h2 == firstNode) h2.next = firstNode;  // adjacent swap case
+	    else head = firstNode;
+
+	    LinkedListStr<Integer> temp = firstNode.next;
+	    firstNode.next = secondNode.next;
+	    secondNode.next = temp;
+
+	    return head;
+	}
+
 	
 }
 
