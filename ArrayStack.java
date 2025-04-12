@@ -1,12 +1,12 @@
 package allQuestions;
 
-public class Stack {
+public class ArrayStack  {
 
 	private int[] arr;
 	private int index;
 	private final int intialArraySize=5;
 	
-	public Stack() {
+	public ArrayStack () {
 		arr= new int[intialArraySize];
 	}
 	
@@ -42,6 +42,10 @@ public class Stack {
 		return index;
 	}
 	
+	public boolean isEmpty() {
+		return size()==0;
+	}
+	
 	private void doubleTheArray() {
 		int temp[] = arr;
 		arr=new int[2*arr.length];
@@ -52,7 +56,7 @@ public class Stack {
 	private void reduceArraySize() {
 		int temp[]=arr;
 		arr= new int[arr.length/2];
-		for(int i=0;i<arr.length;i++)
+		for(int i=0;i<index;i++)
 			arr[i]=temp[i];
 	}
 }
