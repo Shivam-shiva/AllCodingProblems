@@ -31,7 +31,9 @@ public class AllLinkedListQues {
 //		list.printRecursiveHelper();
 //		list.reverseLL();
 		LinkedListStr<Integer> head = list.getHead();
-		head=oddEvenLL(head);
+//		head=oddEvenLL(head);
+		int m=s.nextInt(), n =s.nextInt();
+		head = deleteMNNode(head, m , n);
 		list.print();
 	}
 	
@@ -78,7 +80,42 @@ public class AllLinkedListQues {
 		
 	}
 	
-
+//	You have been given a singly linked list of integers along with two integers, 'M,' and 'N.' Traverse the linked list such that you retain the 'M' nodes, then delete the next 'N' nodes. Continue the same until the end of the linked list. Indexing starts from 1.
+//
+//	To put it in other words, in the given linked list, you need to delete N nodes after every M nodes.
+//
+//	Note :
+//	No need to print the list, it has already been taken care. Only return the new head to the list. You can return null in case where all nodes will be deleted.
+	
+     
+	public static LinkedListStr<Integer> deleteMNNode(LinkedListStr<Integer>  head, int m, int n ){
+		if(head==null || n==0)
+			return head;
+		if(m==0)
+			return null;
+		
+		LinkedListStr<Integer> curNode= head;
+		while(curNode!=null) {
+			int count=m;
+			while(curNode!=null && count>1) {
+				curNode=curNode.next;
+				count--;
+			}
+			LinkedListStr<Integer> temp= curNode;
+			count = n;
+			while(temp!=null && count>=0) {
+				temp=temp.next;
+				count--;
+			}
+			if(curNode!=null) {
+			curNode.next=temp;
+			curNode= curNode.next;
+			}
+		}
+		return head;
+	}
+	
+	
 }
 
 
