@@ -4,13 +4,13 @@ public class LinkedList<T> {
 	
 	private LinkedListStr<T> head;
 	private LinkedListStr<T> tail ;
-	private int size;
+	private static int size;
 	
 	public LinkedList() {
 		size=0;
 	}
 	
-	public int getSize() {
+	public static int getSize() {
 		 return size;
 	}
 	

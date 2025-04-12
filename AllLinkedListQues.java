@@ -33,8 +33,14 @@ public class AllLinkedListQues {
 		LinkedListStr<Integer> head = list.getHead();
 //		head=oddEvenLL(head);
 		int m=s.nextInt(), n =s.nextInt();
-		head = swapNodeNM(head, m , n);
-		list.print();
+//		head = swapNodeNM(head, m , n);
+		head= reverseKNode(head, m);
+		
+		while(head!=null) {
+			System.out.print(head.data+" ");
+			head=head.next;
+		}
+//		list.print();
 	}
 	
 	
@@ -166,6 +172,43 @@ public class AllLinkedListQues {
 	    return head;
 	}
 
+	
+	/*Given a singly linked list of integers, reverse the nodes of the linked list 'k' at a time and return its modified list.
+
+			 'k' is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of 'k,' then left-out nodes, in the end, should be reversed as well.
+
+			Example :
+			Given this linked list: 1 -> 2 -> 3 -> 4 -> 5
+
+			For k = 2, you should return: 2 -> 1 -> 4 -> 3 -> 5
+
+			For k = 3, you should return: 3 -> 2 -> 1 -> 5 -> 4
+			 Note :
+			No need to print the list, it has already been taken care. Only return the new head to the list.*/
+	
+	public static LinkedListStr<Integer> reverseKNode(LinkedListStr<Integer> head, int k ){
+		if(head==null || head.next==null ) {
+			return head;
+		}
+		LinkedListStr<Integer> prev=head;
+		LinkedListStr<Integer> cur = head.next;
+		LinkedListStr<Integer> next= cur.next;
+		int count=1;
+		while(cur!=null && count<k) {
+			cur.next= prev;
+			prev=cur;
+			cur=next;
+			if(next==null) {
+				break;
+			}
+			next=next.next;
+			count++;
+		}
+		
+		LinkedListStr<Integer> small= reverseKNode(cur, k);
+		head.next=small;
+		return prev;
+	}
 	
 }
 
