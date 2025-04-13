@@ -13,7 +13,7 @@ public class AllQuesStack {
 //		st.push(7);st.push(9);
 //		st.pop();st.pop();st.pop();st.pop();st.pop();st.pop();st.pop();st.pop();
 //		System.out.println(st.pop()+" "+st.size());
-		System.out.print(redundantBracket(s.next()));
+		System.out.print(minBracketRev(s.next()));
 
 	}
 	
@@ -69,6 +69,46 @@ public class AllQuesStack {
 				 while(stack.pop()!='(');
 		}
 		return stack.size()!=0;
+	}
+	
+	/*For a given expression in the form of a string, find the minimum number of brackets that can be reversed in order to make the expression balanced. The expression will only contain curly brackets.
+
+	If the expression can't be balanced, return -1.
+
+	Example:
+	Expression: {{{{
+	If we reverse the second and the fourth opening brackets, the whole expression will get balanced. Since we have to reverse two brackets to make the expression balanced, the expected output will be 2.
+
+	Expression: {{{
+	In this example, even if we reverse the last opening bracket, we would be left with the first opening bracket and hence will not be*/
+	
+	public static int minBracketRev(String str) {
+		if(str.length()%2!=0)
+			return -1;
+		
+		Stack<Character> stack = new Stack<>();
+		for(int i=0;i<str.length();i++) {
+			Character ch = str.charAt(i);
+			if(ch=='{')
+				stack.push(ch);
+			else if(ch=='}') {
+				if(!stack.isEmpty() && stack.peek()=='{')
+					stack.pop();
+				else if(stack.isEmpty() || stack.peek()=='}')
+					stack.push('}');
+			}
+		 }
+		int revCount=0;
+		while(!stack.isEmpty()) {
+			 Character first = stack.pop();
+			 Character second = stack.pop();
+			 if(first==second)
+				 revCount+=1;
+			 else 
+				 revCount+=2;
+		}
+		
+		return revCount;
 	}
 
 }
