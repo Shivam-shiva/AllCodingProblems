@@ -6,7 +6,7 @@ public class AllLinkedListQues {
 
 	public static void main(String[] args) {
 		
-		LinkedList<Integer> list = new LinkedList<Integer>();
+		LinkedLists<Integer> list = new LinkedLists<Integer>();
 //		System.out.println(list.getSize());
 //		list.add(new LinkedListStr<String>("Ram"));
 //		list.add(new LinkedListStr<String>("Radha"));

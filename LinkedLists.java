@@ -1,12 +1,12 @@
 package allQuestions;
 
-public class LinkedList<T> {
+public class LinkedLists<T> {
 	
 	private LinkedListStr<T> head;
 	private LinkedListStr<T> tail ;
 	private static int size;
 	
-	public LinkedList() {
+	public LinkedLists() {
 		size=0;
 	}
 	
