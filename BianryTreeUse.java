@@ -127,6 +127,53 @@ public class BianryTreeUse {
 
 		 return new DiameterInfo(height, maxDiameter);
 	}
+	
+	
+//	For a given preorder and inorder traversal of a Binary Tree of type integer stored in an array/list, create the binary tree using the given two arrays/lists. You just need to construct the tree and return the root.
+//
+//			Note: Assume that the Binary Tree contains only unique elements.
+	
+	public static BinaryTreeNode<Integer> buildTree(int[] preOrder, int[] inOrder) {
+		if(preOrder.length==0)
+			return null;
+		
+		 if(preOrder.length==1){
+	        	BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(preOrder[0]);
+	            return root;
+	        }
+	        BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(preOrder[0]);
+	        int i=0 , size=0;
+	        while(inOrder[i]!=preOrder[0]) {
+				i++;
+				size++;
+			}
+	        int sizeInOrderLeft = i;
+			int[] inOrderLeftSubTree= new int[sizeInOrderLeft];
+			i=0;
+			while(inOrder[i]!=preOrder[0]) {
+				inOrderLeftSubTree[i]=inOrder[i];
+				i++;
+			}
+			int[] inOrderRightSubTree= new int[preOrder.length-sizeInOrderLeft-1];
+			for(int j=i+1;j<inOrder.length;j++) {
+				inOrderRightSubTree[j-i-1]= inOrder[j];
+			}
+			int[] preOrderLeftSubTree= new int[sizeInOrderLeft];
+			int k=1;
+			for( k=1;k<=i;k++) {
+				preOrderLeftSubTree[k-1] = preOrder[k];
+			}
+			int[] preOrderRightSubTree= new int[preOrder.length-sizeInOrderLeft-1];
+			for(int m=k;m<preOrder.length;m++) {
+				preOrderRightSubTree[m-k] =preOrder[m];
+			}
+			root.left =buildTree(preOrderLeftSubTree,inOrderLeftSubTree );
+			root.right = buildTree(preOrderRightSubTree,inOrderRightSubTree );
+			
+			return root;
+	}
+	
+	
 
 }
 
