@@ -13,6 +13,20 @@ class BalanceInfo{
 	}
 }
 
+class BstInfo{
+	public int min ;
+	public int max;
+	public boolean isBst;
+	
+	public BstInfo() {}
+	
+	public BstInfo(int min, int max , boolean isBst) {
+		this.min=min;
+		this.max=max;
+		this.isBst= isBst;
+	}
+}
+
 class DiameterInfo{
 	public int height;
 	public int diameter;
@@ -205,7 +219,49 @@ public class BianryTreeUse {
 		return new Pair<>(min, max);
 	}
 	
+	
+	
+	public static void nodeSumK(BinaryTreeNode<Integer> node, int sum, int k, ArrayList<Integer> arr) {
+	    if (node == null)
+	        return;
 
+	    arr.add(node.data); 
+	    sum += node.data;
+
+	    if (node.left == null && node.right == null) {
+	        if (sum == k) {
+	            System.out.println(arr); // Print path only if valid
+	        }
+	    } else {
+	        nodeSumK(node.left, sum, k, arr);
+	        nodeSumK(node.right, sum, k, arr);
+	    }
+
+	    arr.remove(arr.size() - 1); 
+	}
+	
+	
+	public static BstInfo isBst(BinaryTreeNode<Integer> node){
+		if(node==null)
+			return new BstInfo(Integer.MAX_VALUE, Integer.MIN_VALUE, true);
+		
+		BstInfo left= isBst(node.left);
+		BstInfo right = isBst(node.right);
+		
+		boolean bst = false;
+		if(left.max<node.data && right.min>=node.data && left.isBst && right.isBst)
+			bst=true;
+		
+		if(bst) {
+		int min = Math.min(left.min, node.data);
+		int max = Math.max(right.max, node.data);
+		return new BstInfo(min, max, true);
+		}
+		
+		
+		return new BstInfo(Integer.MAX_VALUE, Integer.MIN_VALUE, false);
+	}
+	
 }
 
 
