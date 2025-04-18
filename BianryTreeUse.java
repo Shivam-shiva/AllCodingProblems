@@ -262,6 +262,32 @@ public class BianryTreeUse {
 		return new BstInfo(Integer.MAX_VALUE, Integer.MIN_VALUE, false);
 	}
 	
+	public static ArrayList<LinkedList<Integer>> levelWiseLL(BinaryTreeNode<Integer> root){
+		
+		int level = height(root);
+		ArrayList<LinkedList<Integer>> arr = new ArrayList<LinkedList<Integer>>();
+		for(int i=0;i<=level;i++) {
+			LinkedList<Integer> ll = new LinkedList<>();
+			levelWiseLLHelper(root, ll, i, 0);
+			if(ll!=null)
+				arr.add(ll);
+		}
+		
+		return arr;
+	}
+
+	private static void levelWiseLLHelper(BinaryTreeNode<Integer> root, LinkedList<Integer> ll,  int k, int curLevel) {
+		if(root==null)
+			return ;
+		
+		if(curLevel==k) {
+			ll.add(root.data);
+			return ;
+		}
+		levelWiseLLHelper(root.left, ll, k, curLevel+1);
+		levelWiseLLHelper(root.right, ll, k, curLevel+1);
+	}
+	
 }
 
 

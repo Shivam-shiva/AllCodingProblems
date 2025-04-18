@@ -36,12 +36,14 @@ public class BinarySearchTree {
 	}
 
 	private BinaryTreeNode<Integer> removeHelper(BinaryTreeNode<Integer> node, int data) {
-		if(node==null )
+		if(node==null)
 			return node;
 		
 		if(node.data==data) {
 			if(node.left==null)
 				return node.right;
+			else if(node.right==null)
+				return node.left;
 			
 			else {
 				BinaryTreeNode<Integer> newNode = maxFinder(node.left);
@@ -53,14 +55,12 @@ public class BinarySearchTree {
 		}
 		
 		BinaryTreeNode<Integer> newNode;
-		if(node.data>data) {
-			newNode=removeHelper(node.left,data);
-			node.left=newNode;
+		if (node.data > data) {
+		    node.left = removeHelper(node.left, data);
+		} else {
+		    node.right = removeHelper(node.right, data);
 		}
-		else {
-			newNode=removeHelper(node.right, data);
-			node.right=newNode;
-		}
+
 		
         return node;
 	}
