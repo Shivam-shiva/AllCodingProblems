@@ -13,6 +13,24 @@ class BalanceInfo{
 	}
 }
 
+class AllInfo{
+	public int min ;
+	public int max;
+	public int heightC;
+	public int heightG;
+	public boolean isBst;
+	
+	public AllInfo() {}
+	
+	public AllInfo(int min, int max ,int heightC,int heightG,  boolean isBst) {
+		this.min=min;
+		this.max=max;
+		this.heightC= heightC;
+		this.heightG= heightG;
+		this.isBst= isBst;
+	}
+}
+
 class BstInfo{
 	public int min ;
 	public int max;
@@ -269,7 +287,7 @@ public class BianryTreeUse {
 		for(int i=0;i<=level;i++) {
 			LinkedList<Integer> ll = new LinkedList<>();
 			levelWiseLLHelper(root, ll, i, 0);
-			if(ll!=null)
+			if(ll.size()!=0)
 				arr.add(ll);
 		}
 		
@@ -288,6 +306,37 @@ public class BianryTreeUse {
 		levelWiseLLHelper(root.right, ll, k, curLevel+1);
 	}
 	
+	
+	
+	public static int largestBst(BinaryTreeNode<Integer> root) {
+		
+		AllInfo info = largestBstHelper(root);
+		return info.heightG;
+	}
+
+	private static AllInfo largestBstHelper(BinaryTreeNode<Integer> root) {
+		if(root==null)
+			return new AllInfo(Integer.MAX_VALUE, Integer.MIN_VALUE, 0, 0, true);
+		
+		
+		AllInfo left = largestBstHelper(root.left);
+		AllInfo right = largestBstHelper(root.right);
+		int cHeight;
+		int gHeight = Math.max(left.heightG, right.heightG);
+		if(left.max<root.data && right.min>root.data && left.isBst && right.isBst) {
+			 cHeight = Math.max(left.heightC, right.heightC)+1;
+			 int min = Math.min(root.data, left.min);
+			 int max = Math.max(root.data, right.max);
+				 
+			 if(gHeight<cHeight)
+				gHeight= cHeight;
+			return new AllInfo(min ,max, cHeight, gHeight, true);
+		}
+		
+		
+		
+		return new AllInfo(root.data, root.data, 1,gHeight, true);
+	}
 }
 
 
