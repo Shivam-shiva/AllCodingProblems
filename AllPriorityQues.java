@@ -25,13 +25,20 @@ public class AllPriorityQues {
 //		System.out.print(queue.getMinimum()+" ");/
 		
 		int size = s.nextInt();
-		int arr[] = new int[size];
-		for(int i=0;i<size;i++)
-			arr[i]=s.nextInt();
+//		int arr[] = new int[size];
+//		for(int i=0;i<size;i++)
+//			arr[i]=s.nextInt();
+//		
+//		arr=inLineHeapSort(arr);
+//		for(int i=0;i<size;i++)
+//			System.out.print(arr[i]+" ");/
 		
-		arr=inLineHeapSort(arr);
+		ArrayList<Integer> arr = new ArrayList<Integer>();
 		for(int i=0;i<size;i++)
-			System.out.print(arr[i]+" ");
+			arr.add(s.nextInt());
+		
+		int index = s.nextInt();
+		System.out.println(buyTicket(arr, index));
 	}
 	
 	public static int[] heapSort(int[] arr) {
@@ -120,24 +127,35 @@ public class AllPriorityQues {
 	}
 	
 	
+	
+	public static int buyTicket(ArrayList<Integer> arr, int myIndex) {
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+		for(int i=0;i<arr.size();i++)
+			maxHeap.add(arr.get(i));
+		
+		int time=0;
+		boolean gotTicket = false;
+		while(!gotTicket && arr.size()!=0) {
+			if(maxHeap.peek()==arr.get(0)) {
+				time++;
+				if(myIndex==0)
+					return time;
+				arr.remove(0);
+				maxHeap.poll();
+			}else {
+				int temp = arr.remove(0);
+				arr.add(temp);
+			}
+			myIndex--;
+			if(myIndex==-1)
+				myIndex=arr.size()-1;
+		}
+		
+		return time;
+	}
+	
+	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
