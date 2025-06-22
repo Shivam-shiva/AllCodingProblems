@@ -48,9 +48,23 @@ public class DynamicPrograming {
 //			};
 //		System.out.println(maxSumMatrix(matrix.length, matrix[0].length, matrix));
 
-		//System.out.println(stairCaseCount(10));
-		System.out.println(minSquareToNum(9999));
+		// System.out.println(stairCaseCount(10));
 
+		// System.out.println(minSquareToNum(9999));
+
+//		System.out.println(byteLandian(11));
+
+//		int arr[] = {100, 90, 80, 70, 60};
+//		// Expected Output: 240
+//		
+//		System.out.println(maxMoneyLooted(arr));
+
+		int n = 10, x = 2, y = 4;
+
+//		String name = findWinnerH(n, x, y, true, new HashMap<Integer, Boolean>()) == true ? "Beerus " : "Whis";
+//		System.out.println(name);
+
+		System.out.println(findWinnerIter(n, x, y));
 	}
 
 	public static int minChange(int value, HashMap<Integer, Integer> dp) {
@@ -285,9 +299,102 @@ public class DynamicPrograming {
 				if (res > localRes)
 					res = localRes;
 			}
-			count[i]=res;
+			count[i] = res;
 		}
 		return count[n];
+	}
+
+	public static int byteLandian(int value) {
+
+		if (value == 0)
+			return 0;
+
+		int arr[] = new int[value + 1];
+		arr[0] = 0;
+		arr[1] = 1;
+		arr[2] = 2;
+
+		for (int i = 3; i < arr.length; i++) {
+			int localVal = arr[i / 2] + arr[i / 3] + arr[i / 4];
+			arr[i] = i > localVal ? i : localVal;
+		}
+
+		return arr[value];
+	}
+
+	public static long byteLandianRec(long n, HashMap<Long, Long> memo) {
+		if (n == 2 || n == 1 || n == 0)
+			return n;
+
+		if (!memo.containsKey(n)) {
+			long localVal = byteLandianRec(n / 2, memo) + byteLandianRec(n / 3, memo) + byteLandianRec(n / 4, memo);
+			memo.put(n, Math.max(n, localVal));
+			return localVal;
+		} else {
+			return memo.get(n);
+		}
+
+	}
+
+	public static int maxMoneyLooted(int[] houses) {
+
+		if (houses.length == 0)
+			return 0;
+
+		if (houses.length == 1)
+			return houses[0];
+
+		int profit[] = new int[houses.length + 1];
+		profit[0] = 0;
+		profit[1] = houses[0];
+		profit[2] = profit[2] = Math.max(houses[0], houses[1]);
+
+		for (int i = 3; i < profit.length; i++) {
+			profit[i] = Math.max(profit[i - 1], houses[i - 1] + profit[i - 2]);
+		}
+
+		return profit[profit.length - 1];
+	}
+
+	public static boolean findWinnerH(int n, int x, int y, boolean isBeerus, HashMap<Integer, Boolean> dp) {
+		if (n < 0) {
+			return !isBeerus;
+		}
+		if (n == 0 || n == 1 || n == x || n == y) {
+			return isBeerus;
+		}
+
+		if (!dp.containsKey(n)) {
+			boolean nM = findWinnerH(n - 1, x, y, !isBeerus, dp);
+			boolean xM = findWinnerH(n - x, x, y, !isBeerus, dp);
+			boolean yM = findWinnerH(n - y, x, y, !isBeerus, dp);
+			if (nM || xM || yM) {
+				dp.put(n, isBeerus);
+				return isBeerus;
+			}
+			dp.put(n, isBeerus);
+			return false;
+		} else
+			return dp.get(n);
+
+	}
+
+	public static String findWinnerIter(int n, int x, int y) {
+		boolean[] dp = new boolean[n + 1];
+
+		dp[0] = false; // No coins → lose
+		for (int i = 1; i <= n; i++) {
+			if (i - 1 >= 0 && !dp[i - 1])
+				dp[i] = true;
+			else if (i - x >= 0 && !dp[i - x])
+				dp[i] = true;
+			else if (i - y >= 0 && !dp[i - y])
+				dp[i] = true;
+			else
+				dp[i] = false;
+		}
+
+		return dp[n] ? "Beerus" : "Whis";
 	}
 
 }
